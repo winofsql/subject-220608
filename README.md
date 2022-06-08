@@ -7,6 +7,8 @@
 filter:follows -filter:retweets -filter:replies
 ```
 
+### JavaScript の JSON 定義
+
 ```js
 var json = {
     "item": [
