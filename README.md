@@ -9,7 +9,7 @@ filter:follows -filter:retweets -filter:replies
 
 ### JavaScript の JSON 定義
 
-```js
+```javascript
 var json = {
     "item": [
         {
@@ -56,17 +56,17 @@ var json = {
 
 - #### 中に入れたい文字列を選択して、SHIFT + DEL。その後、スニペットで対象を張り付ける
 
-```js
+```javascript
     $("#test").on("click",function(){
         // console.log(json);
         // console.log(json.item);
         console.log(json.item[1]);
 
-        // alert( json.item[1].name + " : " + json.item[1].subject );
-        // alert( json.item[1]["name"] + " : " + json.item[1]["subject"] );
+        alert( json.item[1].name + " : " + json.item[1].subject );
+        alert( json.item[1]["name"] + " : " + json.item[1]["subject"] );
 
-        // alert( document.getElementById('test').value );
-        // alert( $("#test").val() );
+        alert( document.getElementById('test').value );
+        alert( $("#test").val() );
 
         console.log(document.getElementsByTagName('input'));
         alert( document.getElementsByTagName('input')[1].value  );
