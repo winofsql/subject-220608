@@ -54,11 +54,12 @@ var json = {
 
 ### スニペットのテスト
 
+- #### 中に入れたい文字列を選択して、SHIFT + DEL。その後、スニペットで対象を張り付ける
+
 ```js
     $("#test").on("click",function(){
         // console.log(json);
         // console.log(json.item);
-        console.log(json.item[1]);
         console.log(json.item[1]);
 
         // alert( json.item[1].name + " : " + json.item[1].subject );
