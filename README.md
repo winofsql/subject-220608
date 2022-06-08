@@ -55,9 +55,16 @@ var json = {
         // console.log(json);
         // console.log(json.item);
         console.log(json.item[1]);
+        console.log(json.item[1]);
 
         // alert( json.item[1].name + " : " + json.item[1].subject );
-        alert( json.item[1]["name"] + " : " + json.item[1]["subject"] );
+        // alert( json.item[1]["name"] + " : " + json.item[1]["subject"] );
+
+        // alert( document.getElementById('test').value );
+        // alert( $("#test").val() );
+
+        console.log(document.getElementsByTagName('input'));
+        alert( document.getElementsByTagName('input')[1].value  );
     });
 
 ```
