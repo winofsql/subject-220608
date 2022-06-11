@@ -1744,15 +1744,24 @@ End Function
 
 Function ReRun()
 
-	Dim idx,str,sin,sin2,work,GroupString
+	Dim idx,str,sin,sin2,work,GroupString,Icon
 
 	For idx = 1 to nId
 		' 対象となるレジストリのキー
 		str = document.getElementById("nm"&idx).innerText
 		sin = document.getElementById("inCmd"&idx).value
 		sin2 = document.getElementById("in2"&idx).value
+		Icon = Split(sin2, ",")
+		
 
-		Call WshShell.RegWrite( "HKCR\" & strPath & "\" & str & "\", sin2, "REG_EXPAND_SZ" )
+		Call WshShell.RegWrite( "HKCR\" & strPath & "\" & str & "\", Icon(0), "REG_EXPAND_SZ" )
+		if Ubound(Icon) = 0 then
+			Call WshShell.RegWrite( "HKCR\" & strPath & "\" & str & "\Icon", "", "REG_EXPAND_SZ" )
+		else
+			on error resume next
+			Call WshShell.RegWrite( "HKCR\" & strPath & "\" & str & "\Icon", Icon(1) & "," & Icon(2), "REG_EXPAND_SZ" )
+			on error goto 0
+		end if
 		Call WshShell.RegWrite( "HKCR\" & strPath & "\" & str & "\command\", sin, "REG_EXPAND_SZ" )
 
 	Next
@@ -1964,7 +1973,15 @@ else
 			document.write( "<td>" & vbCrLf )
 
 			work = WshShell.RegRead( "HKCR\" & strPath & "\" & data & "\" )
-			document.write( "<INPUT style='width:300px;' type=text id=in2"  & nId & " value='" & work & "'" & ">" & vbCrLf )
+			work2 = ""
+			on error resume next
+			work2 = WshShell.RegRead( "HKCR\" & strPath & "\" & data & "\Icon" )
+			on error goto 0
+			if work2 <> "" then
+				document.write( "<INPUT style='width:300px;' type=text id=in2"  & nId & " value='" & work & "," & work2 & "'" & ">" & vbCrLf )
+			else
+				document.write( "<INPUT style='width:300px;' type=text id=in2"  & nId & " value='" & work & "'" & ">" & vbCrLf )
+			end if
 
 			document.write( "</td>" & vbCrLf )
 			document.write( "<td style='background-color:#A0A0A0;'>" & vbCrLf )
@@ -1999,7 +2016,6 @@ end if
 
 	window.focus()
 	top.moveTo 0, 0
-'	top.resizeTo screen.width, screen.height - 32
 	top.resizeTo 1000, 1000
 
 </SCRIPT>
